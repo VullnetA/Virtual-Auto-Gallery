@@ -1,0 +1,124 @@
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+
+// Scene setup
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0xf0f0f0); // Light grey color
+
+// Camera setup
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+camera.position.set(0, 5, 15); // Adjusted for larger garage
+
+// Renderer setup
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+// Handle window resize
+window.addEventListener("resize", () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  renderer.setSize(width, height);
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+});
+
+// Orbit Controls setup
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.25;
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 10);
+directionalLight.position.set(5, 10, 7.5);
+scene.add(directionalLight);
+
+// Garage model
+const buildWall = (width, height, depth, position, rotation) => {
+  const geometry = new THREE.BoxGeometry(width, height, depth);
+  const material = new THREE.MeshLambertMaterial({ color: 0x808080 });
+  const wall = new THREE.Mesh(geometry, material);
+  wall.position.set(position.x, position.y, position.z);
+  wall.rotation.set(rotation.x, rotation.y, rotation.z);
+  scene.add(wall);
+};
+
+// Creating walls and ceiling for a larger garage
+const wallThickness = 0.1;
+const garageWidth = 20; // Increased width
+const garageHeight = 6; // Increased height for larger vehicles
+const garageDepth = 20; // Increased depth
+
+// Left Wall
+buildWall(
+  wallThickness,
+  garageHeight,
+  garageDepth,
+  { x: -garageWidth / 2, y: garageHeight / 2, z: 0 },
+  { x: 0, y: 0, z: 0 }
+);
+// Right Wall
+buildWall(
+  wallThickness,
+  garageHeight,
+  garageDepth,
+  { x: garageWidth / 2, y: garageHeight / 2, z: 0 },
+  { x: 0, y: 0, z: 0 }
+);
+// Back Wall
+buildWall(
+  garageWidth,
+  garageHeight,
+  wallThickness,
+  { x: 0, y: garageHeight / 2, z: -garageDepth / 2 },
+  { x: 0, y: 0, z: 0 }
+);
+// Ceiling
+buildWall(
+  garageWidth,
+  wallThickness,
+  garageDepth,
+  { x: 0, y: garageHeight, z: 0 },
+  { x: 0, y: 0, z: 0 }
+);
+
+// Load GLTF Model (ensure the model scale fits the new garage size)
+const loadingManager = new THREE.LoadingManager();
+loadingManager.onLoad = () => {
+  console.log("Model loaded!");
+};
+
+const loader = new GLTFLoader(loadingManager);
+loader.load(
+  "model/scene.gltf", // Ensure this path is correct
+  (gltf) => {
+    // Adjust the model position and scale
+    gltf.scene.position.set(9, 11, -2); // May need adjustment for new garage size
+    gltf.scene.scale.set(1, 1, 1); // Adjust the scale if necessary
+
+    // Add the model to the scene
+    scene.add(gltf.scene);
+  },
+  undefined,
+  (error) => {
+    console.error("An error happened while loading the model:", error);
+  }
+);
+
+// Animation loop
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update(); // needed if controls.enableDamping = true
+  renderer.render(scene, camera);
+}
+
+animate();
