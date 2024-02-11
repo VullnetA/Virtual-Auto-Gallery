@@ -513,29 +513,29 @@ ground.castShadow = true;
 ground.receiveShadow = true;
 scene.add(ground);
 
-const loader = new GLTFLoader(loadingManager);
-loader.load(
-  "model/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const model1 = gltf.scene;
-    // Adjust the model position and scale
-    model1.position.set(-8, 6, 20); // May need adjustment for new garage size
-    model1.scale.set(1, 1, 1); // Adjust the scale if necessary
-    model1.rotation.y = Math.PI / 2 + Math.PI;
+// const loader = new GLTFLoader(loadingManager);
+// loader.load(
+//   "model/scene.gltf", // Ensure this path is correct
+//   (gltf) => {
+//     const model1 = gltf.scene;
+//     // Adjust the model position and scale
+//     model1.position.set(-8, 6, 20); // May need adjustment for new garage size
+//     model1.scale.set(1, 1, 1); // Adjust the scale if necessary
+//     model1.rotation.y = Math.PI / 2 + Math.PI;
 
-    model1.traverse(function (node) {
-      if (node.isMesh) node.castShadow = true;
-      node.receiveShadow = true;
-    });
+//     model1.traverse(function (node) {
+//       if (node.isMesh) node.castShadow = true;
+//       node.receiveShadow = true;
+//     });
 
-    // Add the model to the scene
-    scene.add(model1);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
+//     // Add the model to the scene
+//     scene.add(model1);
+//   },
+//   undefined,
+//   (error) => {
+//     console.error("An error happened while loading the model:", error);
+//   }
+// );
 
 loader.load(
   "ceiling_lamp/scene.gltf", // Ensure this path is correct
@@ -789,33 +789,33 @@ pointLight9.position.set(0, 0.8, -15); // position the light in the scene (x, y,
 pointLight9.castShadow = true;
 scene.add(pointLight9);
 
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp11 = gltf.scene;
-    // Adjust the model position and scale
-    lamp11.position.set(0, 0.8, -15); // May need adjustment for new garage size
-    lamp11.scale.set(3, 3, 3); // Adjust the scale if necessary
-    //lamp8.rotation.y = Math.PI / 2 + Math.PI;
+// loader.load(
+//   "ceiling_lamp/scene.gltf", // Ensure this path is correct
+//   (gltf) => {
+//     const lamp11 = gltf.scene;
+//     // Adjust the model position and scale
+//     lamp11.position.set(0, 0.8, -15); // May need adjustment for new garage size
+//     lamp11.scale.set(3, 3, 3); // Adjust the scale if necessary
+//     //lamp8.rotation.y = Math.PI / 2 + Math.PI;
 
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
+//     // model1.traverse(function (node) {
+//     //   if (node.isMesh) node.castShadow = true;
+//     //   node.receiveShadow = true;
+//     // });
 
-    // Add the model to the scene
-    scene.add(lamp11);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
+//     // Add the model to the scene
+//     scene.add(lamp11);
+//   },
+//   undefined,
+//   (error) => {
+//     console.error("An error happened while loading the model:", error);
+//   }
+// );
 
-const pointLight11 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight11.position.set(0, 0.8, -15); // position the light in the scene (x, y, z)
-pointLight11.castShadow = true;
-scene.add(pointLight11);
+// const pointLight11 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
+// pointLight11.position.set(0, 0.8, -15); // position the light in the scene (x, y, z)
+// pointLight11.castShadow = true;
+// scene.add(pointLight11);
 
 // loader.load(
 //   "model2/scene.gltf", // Ensure this path is correct
