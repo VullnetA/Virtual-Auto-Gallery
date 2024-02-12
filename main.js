@@ -20,6 +20,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.BasicShadowMap;
 
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
@@ -40,12 +41,10 @@ controls.dampingFactor = 0.25;
 
 // Lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-ambientLight.castShadow = true;
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 directionalLight.position.set(-5, 20, 7.5);
-directionalLight.castShadow = true;
 scene.add(directionalLight);
 
 // Point Light
@@ -266,8 +265,8 @@ const pillarPositions = [12, -12, -36];
 pillarPositions.forEach((zPosition) => {
   const pillar = new THREE.Mesh(pillarGeometry, pillarMaterial);
   pillar.position.set(10, -2, zPosition); // Adjust position with base at y = 0
-  pillar.castShadow = true;
-  pillar.receiveShadow = true;
+  // pillar.castShadow = true;
+  // pillar.receiveShadow = true;
   buildingGroup.add(pillar);
 });
 
@@ -277,8 +276,8 @@ const insidePillarGeometry = new THREE.CylinderGeometry(1, 1, 8, 32);
 function createAndPositionPillar(x, y, z) {
   const pillar = new THREE.Mesh(insidePillarGeometry, insidePillarMaterial);
   pillar.position.set(x, y, z);
-  pillar.castShadow = true;
-  pillar.receiveShadow = true;
+  // pillar.castShadow = true;
+  // pillar.receiveShadow = true;
   buildingGroup.add(pillar);
 }
 
@@ -335,8 +334,8 @@ for (let i = 0; i < numberOfSteps; i++) {
 
   // Rotate each step -90 degrees around the Y axis
   step.rotation.y = rotationAngle;
-  step.castShadow = true;
-  step.receiveShadow = true;
+  // step.castShadow = true;
+  // step.receiveShadow = true;
   stairsGroup.add(step); // Add the step to the group instead of the scene
 }
 stairsGroup.position.set(6, -6, 0); // Adjust x, y, z values as needed to move the staircase
@@ -346,7 +345,6 @@ buildingGroup.add(stairsGroup);
 const platform2Geometry = new THREE.BoxGeometry(30, 2, 50); // width, height (thickness), depth
 const platform2 = new THREE.Mesh(platform2Geometry, middlePlatformMaterial);
 platform2.position.y = 2.5;
-platform2.castShadow = true;
 platform2.receiveShadow = true;
 buildingGroup.add(platform2);
 
@@ -354,7 +352,6 @@ buildingGroup.add(platform2);
 const backWall2Geometry = new THREE.BoxGeometry(0.5, 7, 50);
 const backWall2 = new THREE.Mesh(backWall2Geometry, windowMaterial);
 backWall2.position.set(14.7, 6, 0);
-backWall2.castShadow = true;
 backWall2.receiveShadow = true;
 buildingGroup.add(backWall2);
 
@@ -363,7 +360,6 @@ const frontWall2Geometry = new THREE.BoxGeometry(0.5, 7, 50);
 const frontWall2 = new THREE.Mesh(frontWall2Geometry, windowMaterial);
 frontWall2.position.x = -14.7;
 frontWall2.position.y = 6;
-frontWall2.castShadow = true;
 frontWall2.receiveShadow = true;
 buildingGroup.add(frontWall2);
 
@@ -372,14 +368,12 @@ const leftWall2Geometry = new THREE.BoxGeometry(0.5, 7, 29);
 const leftWall2 = new THREE.Mesh(leftWall2Geometry, windowMaterial);
 leftWall2.position.set(-0.1, 6, 24.8);
 leftWall2.rotation.y = 90 * (Math.PI / 180);
-leftWall2.castShadow = true;
 leftWall2.receiveShadow = true;
 buildingGroup.add(leftWall2);
 
 // Platform 3
 const platform3 = new THREE.Mesh(platform2Geometry, topPlatformMaterials);
 platform3.position.y = 10.5;
-platform3.castShadow = true;
 platform3.receiveShadow = true;
 buildingGroup.add(platform3);
 
@@ -390,7 +384,6 @@ const platform4 = new THREE.Mesh(platform4Geometry, bottomPlatformMaterial);
 platform4.position.x = -30;
 platform4.position.y = -5.5;
 platform4.position.z = -35;
-platform4.castShadow = true;
 platform4.receiveShadow = true;
 buildingGroup.add(platform4);
 
@@ -398,7 +391,6 @@ buildingGroup.add(platform4);
 const leftWall3Geometry = new THREE.BoxGeometry(1, 9, 20);
 const leftWall3 = new THREE.Mesh(leftWall3Geometry, outsideWallMaterial);
 leftWall3.position.set(5, -2, -35);
-leftWall3.castShadow = true;
 leftWall3.receiveShadow = true;
 buildingGroup.add(leftWall3);
 
@@ -407,7 +399,6 @@ const backWall3Geometry = new THREE.BoxGeometry(0.5, 7, 70);
 const backWall3 = new THREE.Mesh(backWall3Geometry, outsideWallMaterial);
 backWall3.position.set(-30, -1.5, -44.8);
 backWall3.rotation.y = 90 * (Math.PI / 180);
-backWall3.castShadow = true;
 backWall3.receiveShadow = true;
 buildingGroup.add(backWall3);
 
@@ -418,7 +409,6 @@ frontWall3.position.x = -40;
 frontWall3.position.y = -1;
 frontWall3.position.z = -25.2;
 frontWall3.rotation.y = 90 * (Math.PI / 180);
-frontWall3.castShadow = true;
 frontWall3.receiveShadow = true;
 buildingGroup.add(frontWall3);
 
@@ -428,7 +418,6 @@ const rightWall1 = new THREE.Mesh(rightWall1Geometry, windowMaterial);
 rightWall1.position.x = -65;
 rightWall1.position.y = -1.5;
 rightWall1.position.z = -35;
-rightWall1.castShadow = true;
 rightWall1.receiveShadow = true;
 buildingGroup.add(rightWall1);
 
@@ -438,7 +427,6 @@ const platform5 = new THREE.Mesh(platform5Geometry, middlePlatformMaterial);
 platform5.position.x = -25;
 platform5.position.y = 2.5;
 platform5.position.z = -35;
-platform5.castShadow = true;
 platform5.receiveShadow = true;
 buildingGroup.add(platform5);
 
@@ -446,7 +434,6 @@ buildingGroup.add(platform5);
 const leftWall4Geometry = new THREE.BoxGeometry(0.5, 7, 20);
 const leftWall4 = new THREE.Mesh(leftWall4Geometry, windowMaterial);
 leftWall4.position.set(14.7, 6, -35);
-leftWall4.castShadow = true;
 leftWall4.receiveShadow = true;
 buildingGroup.add(leftWall4);
 
@@ -457,7 +444,6 @@ frontWall4.position.x = -40;
 frontWall4.position.y = 6;
 frontWall4.position.z = -25;
 frontWall4.rotation.y = 90 * (Math.PI / 180);
-frontWall4.castShadow = true;
 frontWall4.receiveShadow = true;
 buildingGroup.add(frontWall4);
 
@@ -467,7 +453,6 @@ const rightWall2 = new THREE.Mesh(rightWall2Geometry, windowMaterial);
 rightWall2.position.x = -65;
 rightWall2.position.y = 6;
 rightWall2.position.z = -35;
-rightWall2.castShadow = true;
 rightWall2.receiveShadow = true;
 buildingGroup.add(rightWall2);
 
@@ -476,7 +461,6 @@ const backWall4Geometry = new THREE.BoxGeometry(0.5, 7, 80);
 const backWall4 = new THREE.Mesh(backWall4Geometry, windowMaterial);
 backWall4.position.set(-25, 6, -45);
 backWall4.rotation.y = 90 * (Math.PI / 180);
-backWall4.castShadow = true;
 backWall4.receiveShadow = true;
 buildingGroup.add(backWall4);
 
@@ -485,7 +469,6 @@ const platform6 = new THREE.Mesh(platform5Geometry, topPlatformMaterials);
 platform6.position.x = -25;
 platform6.position.y = 10.5;
 platform6.position.z = -35;
-platform6.castShadow = true;
 platform6.receiveShadow = true;
 buildingGroup.add(platform6);
 
@@ -495,7 +478,6 @@ const parking = new THREE.Mesh(parkingGeometry, parkingMaterial);
 parking.position.x = -40.9;
 parking.position.y = -5.5;
 parking.position.z = 0;
-parking.castShadow = true;
 parking.receiveShadow = true;
 buildingGroup.add(parking);
 
@@ -504,318 +486,81 @@ buildingGroup.position.set(30, -0.7, 20);
 
 scene.add(buildingGroup);
 
-// Ground
+//Ground
 const groundGeometry = new THREE.PlaneGeometry(200, 200); // Size of the ground
 const ground = new THREE.Mesh(groundGeometry, groundMaterial);
 ground.rotation.x = -Math.PI / 2; // Rotate the ground to lie flat
 ground.position.y = -6; // Adjust the position to be just below your stairs and other objects
-ground.castShadow = true;
 ground.receiveShadow = true;
 scene.add(ground);
 
-// const loader = new GLTFLoader(loadingManager);
-// loader.load(
-//   "model/scene.gltf", // Ensure this path is correct
-//   (gltf) => {
-//     const model1 = gltf.scene;
-//     // Adjust the model position and scale
-//     model1.position.set(-8, 6, 20); // May need adjustment for new garage size
-//     model1.scale.set(1, 1, 1); // Adjust the scale if necessary
-//     model1.rotation.y = Math.PI / 2 + Math.PI;
+const loader = new GLTFLoader(loadingManager);
 
-//     model1.traverse(function (node) {
-//       if (node.isMesh) node.castShadow = true;
-//       node.receiveShadow = true;
-//     });
+let lampModel; // This will hold the loaded model
 
-//     // Add the model to the scene
-//     scene.add(model1);
-//   },
-//   undefined,
-//   (error) => {
-//     console.error("An error happened while loading the model:", error);
-//   }
-// );
+// Function to initialize the lamp model
+function loadModelOnce(modelPath, callback) {
+  loader.load(
+    modelPath,
+    (gltf) => {
+      lampModel = gltf.scene;
+      callback(); // Proceed to use the model after it's loaded
+    },
+    undefined,
+    (error) => {
+      console.error("An error happened while loading the model:", error);
+    }
+  );
+}
 
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const model4 = gltf.scene;
-    // Adjust the model position and scale
-    model4.position.set(25, 8.8, 17); // May need adjustment for new garage size
-    model4.scale.set(3, 3, 3); // Adjust the scale if necessary
-    model4.rotation.y = Math.PI / 2 + Math.PI;
+// Function to create and add a lamp clone and its light to the scene
+function addLampAndLight(
+  position,
+  scale,
+  rotationY,
+  lightIntensity,
+  lightDistance
+) {
+  const lampClone = lampModel.clone(); // Clone the model
+  lampClone.position.set(...position);
+  lampClone.scale.set(...scale);
+  if (rotationY !== undefined) lampClone.rotation.y = rotationY;
 
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
+  scene.add(lampClone);
 
-    // Add the model to the scene
-    scene.add(model4);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
+  const pointLight = new THREE.PointLight(
+    0xffffff,
+    lightIntensity,
+    lightDistance
+  );
+  pointLight.position.set(...position);
+  pointLight.castShadow = true;
+  scene.add(pointLight);
+}
 
-const pointLight1 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight1.position.set(25, 8.8, 17); // position the light in the scene (x, y, z)
-pointLight1.castShadow = true;
-scene.add(pointLight1);
+// Load the model once, then use it multiple times
+loadModelOnce("ceiling_lamp_673/scene.gltf", () => {
+  const lampPositions = [
+    [25, 8.6, 17],
+    [25, 8.6, 0],
+    [20, 8.6, -15],
+    [0, 8.6, -15],
+    [-20, 8.6, -15],
+    [25, 0.6, 17],
+    [25, 0.6, 0],
+    [20, 0.6, -15],
+    [0, 0.6, -15],
+    [-20, 0.6, -15],
+  ];
+  const scale = [0.1, 0.1, 0.1];
+  const lightIntensity = 50;
+  const lightDistance = 50;
 
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp2 = gltf.scene;
-    // Adjust the model position and scale
-    lamp2.position.set(25, 8.8, 0); // May need adjustment for new garage size
-    lamp2.scale.set(3, 3, 3); // Adjust the scale if necessary
-    lamp2.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp2);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight2 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight2.position.set(25, 8.8, 0); // position the light in the scene (x, y, z)
-pointLight2.castShadow = true;
-scene.add(pointLight2);
-
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp3 = gltf.scene;
-    // Adjust the model position and scale
-    lamp3.position.set(20, 8.8, -15); // May need adjustment for new garage size
-    lamp3.scale.set(3, 3, 3); // Adjust the scale if necessary
-    //lamp3.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp3);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight3 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight3.position.set(20, 8.8, -15); // position the light in the scene (x, y, z)
-pointLight3.castShadow = true;
-scene.add(pointLight3);
-
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp4 = gltf.scene;
-    // Adjust the model position and scale
-    lamp4.position.set(0, 8.8, -15); // May need adjustment for new garage size
-    lamp4.scale.set(3, 3, 3); // Adjust the scale if necessary
-    //lamp3.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp4);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight4 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight4.position.set(0, 8.8, -15); // position the light in the scene (x, y, z)
-pointLight4.castShadow = true;
-scene.add(pointLight4);
-
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp5 = gltf.scene;
-    // Adjust the model position and scale
-    lamp5.position.set(-20, 8.8, -15); // May need adjustment for new garage size
-    lamp5.scale.set(3, 3, 3); // Adjust the scale if necessary
-    //lamp3.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp5);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight5 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight5.position.set(-20, 8.8, -15); // position the light in the scene (x, y, z)
-pointLight5.castShadow = true;
-scene.add(pointLight5);
-
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp6 = gltf.scene;
-    // Adjust the model position and scale
-    lamp6.position.set(25, 0.8, 17); // May need adjustment for new garage size
-    lamp6.scale.set(3, 3, 3); // Adjust the scale if necessary
-    lamp6.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp6);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight6 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight6.position.set(25, 0.8, 17); // position the light in the scene (x, y, z)
-pointLight6.castShadow = true;
-scene.add(pointLight6);
-
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp7 = gltf.scene;
-    // Adjust the model position and scale
-    lamp7.position.set(25, 0.8, 0); // May need adjustment for new garage size
-    lamp7.scale.set(3, 3, 3); // Adjust the scale if necessary
-    lamp7.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp7);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight7 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight7.position.set(25, 0.8, 0); // position the light in the scene (x, y, z)
-pointLight7.castShadow = true;
-scene.add(pointLight7);
-
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp8 = gltf.scene;
-    // Adjust the model position and scale
-    lamp8.position.set(20, 0.8, -15); // May need adjustment for new garage size
-    lamp8.scale.set(3, 3, 3); // Adjust the scale if necessary
-    //lamp8.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp8);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight8 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight8.position.set(20, 0.8, -15); // position the light in the scene (x, y, z)
-pointLight8.castShadow = true;
-scene.add(pointLight8);
-
-loader.load(
-  "ceiling_lamp/scene.gltf", // Ensure this path is correct
-  (gltf) => {
-    const lamp9 = gltf.scene;
-    // Adjust the model position and scale
-    lamp9.position.set(0, 0.8, -15); // May need adjustment for new garage size
-    lamp9.scale.set(3, 3, 3); // Adjust the scale if necessary
-    //lamp8.rotation.y = Math.PI / 2 + Math.PI;
-
-    // model1.traverse(function (node) {
-    //   if (node.isMesh) node.castShadow = true;
-    //   node.receiveShadow = true;
-    // });
-
-    // Add the model to the scene
-    scene.add(lamp9);
-  },
-  undefined,
-  (error) => {
-    console.error("An error happened while loading the model:", error);
-  }
-);
-
-const pointLight9 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-pointLight9.position.set(0, 0.8, -15); // position the light in the scene (x, y, z)
-pointLight9.castShadow = true;
-scene.add(pointLight9);
-
-// loader.load(
-//   "ceiling_lamp/scene.gltf", // Ensure this path is correct
-//   (gltf) => {
-//     const lamp11 = gltf.scene;
-//     // Adjust the model position and scale
-//     lamp11.position.set(0, 0.8, -15); // May need adjustment for new garage size
-//     lamp11.scale.set(3, 3, 3); // Adjust the scale if necessary
-//     //lamp8.rotation.y = Math.PI / 2 + Math.PI;
-
-//     // model1.traverse(function (node) {
-//     //   if (node.isMesh) node.castShadow = true;
-//     //   node.receiveShadow = true;
-//     // });
-
-//     // Add the model to the scene
-//     scene.add(lamp11);
-//   },
-//   undefined,
-//   (error) => {
-//     console.error("An error happened while loading the model:", error);
-//   }
-// );
-
-// const pointLight11 = new THREE.PointLight(0xffffff, 50, 50); // color, intensity, distance
-// pointLight11.position.set(0, 0.8, -15); // position the light in the scene (x, y, z)
-// pointLight11.castShadow = true;
-// scene.add(pointLight11);
+  lampPositions.forEach((position, index) => {
+    // Adjust rotation for specific lamps if necessary
+    addLampAndLight(position, scale, lightIntensity, lightDistance);
+  });
+});
 
 // loader.load(
 //   "model2/scene.gltf", // Ensure this path is correct
@@ -832,6 +577,39 @@ scene.add(pointLight9);
 //     });
 //     // Add the model to the scene
 //     scene.add(gltf.scene);
+//   },
+//   undefined,
+//   (error) => {
+//     console.error("An error happened while loading the model:", error);
+//   }
+// );
+
+// let model2Original; // This will hold the original loaded model
+
+// // Function to load the model once
+// loader.load(
+//   "model2/scene.gltf", // Ensure this path is correct
+//   (gltf) => {
+//     model2Original = gltf.scene;
+//     // model2Original.traverse(function (node) {
+//     //   if (node.isMesh) {
+//     //     node.castShadow = true;
+//     //     node.receiveShadow = true;
+//     //   }
+//     // });
+
+//     // After loading, clone and add the model 50 times to the scene
+//     for (let i = 0; i < 10; i++) {
+//       const modelClone = model2Original.clone();
+
+//       // Adjust the clone's position, scale, and rotation
+//       modelClone.position.set(10 + i, -5, -5); // Example: modifying x position for each clone
+//       modelClone.scale.set(1, 1, 1);
+//       modelClone.rotation.y = Math.PI / 2;
+
+//       // Add the clone to the scene
+//       scene.add(modelClone);
+//     }
 //   },
 //   undefined,
 //   (error) => {
