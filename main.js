@@ -19,8 +19,8 @@ camera.position.set(0, 5, 15); // Adjusted for larger garage
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.BasicShadowMap;
+// renderer.shadowMap.enabled = true;
+// renderer.shadowMap.type = THREE.BasicShadowMap;
 
 const loadingManager = new THREE.LoadingManager();
 const textureLoader = new THREE.TextureLoader(loadingManager);
@@ -40,7 +40,7 @@ controls.enableDamping = true;
 controls.dampingFactor = 0.25;
 
 // Lighting
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
@@ -211,7 +211,7 @@ const platform1 = new THREE.Mesh(platform1Geometry, bottomPlatformMaterial);
 platform1.position.x = -5.3;
 platform1.position.y = -5.5;
 platform1.receiveShadow = true;
-platform1.castShadow = true;
+//platform1.castShadow = true;
 buildingGroup.add(platform1);
 
 // Back Wall 1F
@@ -219,7 +219,7 @@ const backWall1Geometry = new THREE.BoxGeometry(1, 9, 50);
 const backWall1 = new THREE.Mesh(backWall1Geometry, outsideWallMaterial);
 backWall1.position.set(5, -2, 0);
 backWall1.receiveShadow = true;
-backWall1.castShadow = true;
+//backWall1.castShadow = true;
 buildingGroup.add(backWall1);
 
 // Front Wall 1F
@@ -227,7 +227,7 @@ const frontWall1Geometry = new THREE.BoxGeometry(0.5, 8, 50);
 const frontWall1 = new THREE.Mesh(frontWall1Geometry, windowMaterial);
 frontWall1.position.x = -15;
 frontWall1.position.y = -1;
-frontWall1.castShadow = true;
+//frontWall1.castShadow = true;
 frontWall1.receiveShadow = true;
 buildingGroup.add(frontWall1);
 
@@ -266,7 +266,7 @@ pillarPositions.forEach((zPosition) => {
   const pillar = new THREE.Mesh(pillarGeometry, pillarMaterial);
   pillar.position.set(10, -2, zPosition); // Adjust position with base at y = 0
   // pillar.castShadow = true;
-  // pillar.receiveShadow = true;
+  pillar.receiveShadow = true;
   buildingGroup.add(pillar);
 });
 
@@ -277,7 +277,7 @@ function createAndPositionPillar(x, y, z) {
   const pillar = new THREE.Mesh(insidePillarGeometry, insidePillarMaterial);
   pillar.position.set(x, y, z);
   // pillar.castShadow = true;
-  // pillar.receiveShadow = true;
+  pillar.receiveShadow = true;
   buildingGroup.add(pillar);
 }
 
@@ -539,7 +539,7 @@ function addLampAndLight(
 }
 
 // Load the model once, then use it multiple times
-loadModelOnce("ceiling_lamp_673/scene.gltf", () => {
+loadModelOnce("ceiling_lamp_673/scene2.gltf", () => {
   const lampPositions = [
     [25, 8.6, 17],
     [25, 8.6, 0],
@@ -556,33 +556,121 @@ loadModelOnce("ceiling_lamp_673/scene.gltf", () => {
   const lightIntensity = 50;
   const lightDistance = 50;
 
-  lampPositions.forEach((position, index) => {
+  lampPositions.forEach((position) => {
     // Adjust rotation for specific lamps if necessary
     addLampAndLight(position, scale, lightIntensity, lightDistance);
   });
 });
 
-// loader.load(
-//   "model2/scene.gltf", // Ensure this path is correct
-//   (gltf) => {
-//     const model2 = gltf.scene;
-//     // Adjust the model position and scale
-//     model2.position.set(10, -5, -5); // May need adjustment for new garage size
-//     model2.scale.set(1, 1, 1); // Adjust the scale if necessary
-//     model2.rotation.y = Math.PI / 2;
+function loadModel(modelDetails) {
+  const { path, position, scale, rotationY } = modelDetails;
+  loader.load(
+    path,
+    (gltf) => {
+      const model = gltf.scene;
+      model.position.set(...position);
+      model.scale.set(...scale);
+      model.rotation.y = rotationY;
+      scene.add(model);
+    },
+    undefined,
+    (error) => {
+      console.error(
+        `An error happened while loading the model: ${path}`,
+        error
+      );
+    }
+  );
+}
 
-//     model2.traverse(function (node) {
-//       if (node.isMesh) node.castShadow = true;
-//       node.receiveShadow = true;
-//     });
-//     // Add the model to the scene
-//     scene.add(gltf.scene);
-//   },
-//   undefined,
-//   (error) => {
-//     console.error("An error happened while loading the model:", error);
-//   }
-// );
+const models = [
+  {
+    path: "lamborghini_gallardo/scene.gltf",
+    position: [-15, -5.5, -10],
+    scale: [1.1, 1.1, 1.1],
+    rotationY: Math.PI / 6,
+  },
+  {
+    path: "g500/scene.gltf",
+    position: [4, -4, -10],
+    scale: [0.6, 0.6, 0.6],
+    rotationY: Math.PI / 6,
+  },
+  {
+    path: "mclaren/scene.gltf",
+    position: [-23, -5.5, -7],
+    scale: [130, 130, 130],
+    rotationY: -Math.PI / 6,
+  },
+  {
+    path: "gls_580/scene.gltf",
+    position: [-10, -5.5, -7],
+    scale: [1.5, 1.5, 1.5],
+    rotationY: -Math.PI / 6,
+  },
+  {
+    path: "chiron/scene.gltf",
+    position: [20, -5.5, 15],
+    scale: [2.8, 2.8, 2.8],
+    rotationY: Math.PI,
+  },
+  {
+    path: "jesko/scene.gltf",
+    position: [20, -5.5, 25],
+    scale: [0.024, 0.024, 0.024],
+    rotationY: -Math.PI / 2,
+  },
+  {
+    path: "911/scene.gltf",
+    position: [19, -5.5, 35],
+    scale: [1.8, 1.8, 1.8],
+    rotationY: -Math.PI / 2,
+  },
+  {
+    path: "r8/scene.gltf",
+    position: [-47, -2.2, 113],
+    scale: [0.5, 0.5, 0.5],
+    rotationY: -Math.PI / 2,
+  },
+  {
+    path: "pagani/scene.gltf",
+    position: [20, -5.5, 3],
+    scale: [200, 200, 200],
+    rotationY: -Math.PI / 2,
+  },
+  {
+    path: "bmw/scene.gltf",
+    position: [27, 3, 17],
+    scale: [0.45, 0.45, 0.45],
+    rotationY: Math.PI / 2,
+  },
+  {
+    path: "mazda/scene.gltf",
+    position: [19, 3, 35],
+    scale: [200, 200, 200],
+    rotationY: 0,
+  },
+  {
+    path: "mustang/scene.gltf",
+    position: [-12, 2.8, -10],
+    scale: [1.7, 1.7, 1.7],
+    rotationY: Math.PI / 3,
+  },
+  {
+    path: "shelby/scene.gltf",
+    position: [-28, 2.8, -13],
+    scale: [1.6, 1.6, 1.6],
+    rotationY: Math.PI / 3,
+  },
+  {
+    path: "nfs/scene.gltf",
+    position: [2, 2.8, -10],
+    scale: [0.08, 0.08, 0.08],
+    rotationY: Math.PI / 2,
+  },
+];
+
+models.forEach(loadModel);
 
 // let model2Original; // This will hold the original loaded model
 
@@ -599,7 +687,7 @@ loadModelOnce("ceiling_lamp_673/scene.gltf", () => {
 //     // });
 
 //     // After loading, clone and add the model 50 times to the scene
-//     for (let i = 0; i < 10; i++) {
+//     for (let i = 0; i < 20; i++) {
 //       const modelClone = model2Original.clone();
 
 //       // Adjust the clone's position, scale, and rotation
@@ -610,27 +698,6 @@ loadModelOnce("ceiling_lamp_673/scene.gltf", () => {
 //       // Add the clone to the scene
 //       scene.add(modelClone);
 //     }
-//   },
-//   undefined,
-//   (error) => {
-//     console.error("An error happened while loading the model:", error);
-//   }
-// );
-
-// loader.load(
-//   "model3/scene.gltf", // Ensure this path is correct
-//   (gltf) => {
-//     const model3 = gltf.scene;
-//     // Adjust the model position and scale
-//     gltf.scene.position.set(-11, -4.7, 7); // May need adjustment for new garage size
-//     gltf.scene.scale.set(100, 100, 100); // Adjust the scale if necessary
-//     gltf.scene.rotation.y = Math.PI / 2 + Math.PI;
-//     model3.traverse(function (node) {
-//       if (node.isMesh) node.castShadow = true;
-//       node.receiveShadow = true;
-//     });
-//     // Add the model to the scene
-//     scene.add(gltf.scene);
 //   },
 //   undefined,
 //   (error) => {

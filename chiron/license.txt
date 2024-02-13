@@ -1,0 +1,11 @@
+Model Information:
+* title:	Free Bugatti Chiron
+* source:	https://sketchfab.com/3d-models/free-bugatti-chiron-374890e62c5a44e9a739ca638b6e0a18
+* author:	ALIEEEN (https://sketchfab.com/ALIEEEN)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Free Bugatti Chiron" (https://sketchfab.com/3d-models/free-bugatti-chiron-374890e62c5a44e9a739ca638b6e0a18) by ALIEEEN (https://sketchfab.com/ALIEEEN) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

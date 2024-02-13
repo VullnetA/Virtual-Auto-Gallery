@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ford Mustang GT (NFS edition)
+* source:	https://sketchfab.com/3d-models/ford-mustang-gt-nfs-edition-a432eb460e344773840b35f8077c9fd2
+* author:	BadKarma™ (https://sketchfab.com/890244234)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ford Mustang GT (NFS edition)" (https://sketchfab.com/3d-models/ford-mustang-gt-nfs-edition-a432eb460e344773840b35f8077c9fd2) by BadKarma™ (https://sketchfab.com/890244234) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

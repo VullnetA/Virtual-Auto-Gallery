@@ -1,0 +1,11 @@
+Model Information:
+* title:	2024 Ford Mustang GT3
+* source:	https://sketchfab.com/3d-models/2024-ford-mustang-gt3-d2b7823f48f147e99e857ee825d089cc
+* author:	kevin (ケビン) (https://sketchfab.com/sohyalebret)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "2024 Ford Mustang GT3" (https://sketchfab.com/3d-models/2024-ford-mustang-gt3-d2b7823f48f147e99e857ee825d089cc) by kevin (ケビン) (https://sketchfab.com/sohyalebret) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

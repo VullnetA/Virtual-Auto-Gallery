@@ -1,0 +1,11 @@
+Model Information:
+* title:	McLaren P1
+* source:	https://sketchfab.com/3d-models/mclaren-p1-6d6072b79ae444058a8f7c7ffd548fb4
+* author:	₦₥₵ ฿₵ (https://sketchfab.com/nmcbc)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "McLaren P1" (https://sketchfab.com/3d-models/mclaren-p1-6d6072b79ae444058a8f7c7ffd548fb4) by ₦₥₵ ฿₵ (https://sketchfab.com/nmcbc) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
