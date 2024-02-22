@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { TrackballControls } from "three/addons/controls/TrackballControls.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 // Scene setup
@@ -35,9 +35,10 @@ window.addEventListener("resize", () => {
 });
 
 // Orbit Controls setup
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.25;
+const controls = new TrackballControls(camera, renderer.domElement);
+controls.staticMoving = true;
+controls.noPan = true;
+controls.target.set(10, 5, -10);
 
 // Lighting
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
@@ -671,6 +672,23 @@ const models = [
 ];
 
 models.forEach(loadModel);
+
+loader.load(
+  "fountain1/scene.gltf",
+  (gltf) => {
+    const model = gltf.scene;
+    model.position.set(-10, -5.2, 20);
+    model.scale.set(0.8, 0.8, 0.8);
+    scene.add(model);
+  },
+  undefined,
+  (error) => {
+    console.error(
+      `An error happened while loading the model: ${"fountain/scene.gltf"}`,
+      error
+    );
+  }
+);
 
 // let model2Original; // This will hold the original loaded model
 

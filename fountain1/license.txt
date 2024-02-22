@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fountain
+* source:	https://sketchfab.com/3d-models/fountain-07b16f0c118d4073a81522a526183c11
+* author:	Eugen Shuklin (https://sketchfab.com/architectors)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fountain" (https://sketchfab.com/3d-models/fountain-07b16f0c118d4073a81522a526183c11) by Eugen Shuklin (https://sketchfab.com/architectors) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
